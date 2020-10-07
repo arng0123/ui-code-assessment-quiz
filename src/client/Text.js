@@ -19,7 +19,7 @@ export default function Text ( {question, answerSubmit}) {
     <div>
       {question.question}
       <form onSubmit={handleSubmit}>
-          <input type = "text"onChange={handleChange}/>
+          <input type = "text" onChange={handleChange}/>
         <button type="submit">Next</button>
       </form>
     </div>

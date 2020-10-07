@@ -53,6 +53,7 @@ export default function Questions () {
 
       if(answer){
         setCorrect(correct++)
+        console.log(correct)
       } else {
         setWrong(wrong++)
       }

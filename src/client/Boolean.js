@@ -1,29 +1,44 @@
 import React, {useState} from 'react'
 
-export default function Boolean () {
+export default function Boolean ({question, answerSubmit}) {
 const [selectedAnswer, setselectedAnswer] = useState()
-const [isCorrect, setisCorrect] = useState(false)
+
+//need handleChange func to set state on selected answer
+const handleChange = (e) => {
+  setselectedAnswer(e.target.value)
+}
+
+//need handleSubmit to do an answer check 
+const handleSubmit = (e) => {
+  e.preventDefault()
+
+  selectedAnswer === question.correct_answer ? answerSubmit(true) : answerSubmit(false)
+
+  setselectedAnswer('')
+}
 
   return(
     <div>
-      THIS IS A BOOL Q
-      <form>
+      {question.question}
+      <form onSubmit={handleSubmit}>
         <div>
-        <label>
           <input 
           type = "radio"
+          value = "True"
+          name = "answer"
+          onChange = {handleChange}
           />
           True
-        </label>
         </div>
 
         <div>
-        <label>
           <input 
           type = "radio"
+          value = "False"
+          name = "answer"
+          onChange = {handleChange}
           />
           False
-        </label>
         </div>
         <button>Next</button>
       </form>

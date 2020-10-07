@@ -1,15 +1,14 @@
 import React, {useState, useEffect} from 'react'
 
-export default function Multiple ({q}) {
+export default function Multiple ({question}) {
   const [userAnswer, setAnswer] = useState('')
 
 
   return(
     <div>
-      THIS IS A MULTI Q
+      {question.question}
       <form>
         <label>
-         <p>{q ? q.question : null}</p>
           <input 
           type = "radio"
           />
@@ -21,6 +20,9 @@ export default function Multiple ({q}) {
   )
 }
 
-//put incorrect answers and correct answers in an array
+//put incorrect answers and correct answers in an array //map over this array
+
 // on each radio click set it on state
 // on the form submit compare this with the correct answer from the prop ==> call answer submit
+
+//
