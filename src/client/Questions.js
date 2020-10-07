@@ -5,10 +5,10 @@ import Text from '../client/Text'
 import Boolean from '../client/Boolean'
 
 export default function Questions () {
-  const [questions, setQuestions] = useState([])
-  const [correct, setCorrect] = useState(0)
-  const [wrong, setWrong] = useState(0)
-  const [questionNum, setQuestionNum]=useState(0)
+   let [questions, setQuestions] = useState([])
+   let [correct, setCorrect] = useState(0)
+   let [wrong, setWrong] = useState(0)
+   let [questionNum, setQuestionNum]=useState(0)
 
   //Set limit for demo purposes
   const questionMax = 2
@@ -19,9 +19,7 @@ export default function Questions () {
     try {
       async function getQ () {
         const response = await fetch ('http://localhost:4000/api/questions')
-        console.log(response)
         const results = await response.json()
-        console.log(results.results)
         shuffleQ(results.results)
       }
 
@@ -50,7 +48,8 @@ export default function Questions () {
 
   //function for updating state with correct, wrong, and questionNum for every answer submission
     const answerSubmit = (answer) => {
-      setQuestionNum(questionNum++)
+      setQuestionNum(questionNum+=1)
+      console.log(questionNum)
 
       if(answer){
         setCorrect(correct++)
@@ -63,22 +62,26 @@ export default function Questions () {
   //function for conditionally rendering question types
   const questionType = (question) => {
     if(question.type === "multiple"){
-      return <Multiple/>
+      return <Multiple question={question} answerSubmit = {answerSubmit}/>
     }
 
     if(question.type === "boolean") {
-      return <Boolean />
+      return <Boolean question={question} answerSubmit = {answerSubmit}/>
     }
 
     if(question.type === "text"){
-      return <Text />
+      return <Text question={question} answerSubmit = {answerSubmit}/>
     }
   }
 
 
+    if(questions.length ===0) {
+      return <div>Loading...</div>
+    }  
+  
     return(
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        {questions.length === 0 ? "Loading...":
+        {
           (questionNum === questionMax ? <Summary /> : questionType(questions[questionNum]) )}
       </div>
     )

@@ -1,6 +1,8 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 export default function Boolean () {
+const [selectedAnswer, setselectedAnswer] = useState()
+const [isCorrect, setisCorrect] = useState(false)
 
   return(
     <div>
@@ -23,6 +25,7 @@ export default function Boolean () {
           False
         </label>
         </div>
+        <button>Next</button>
       </form>
     </div>
   )

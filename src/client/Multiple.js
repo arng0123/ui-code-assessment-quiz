@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 
 export default function Multiple ({q}) {
   const [userAnswer, setAnswer] = useState('')
-  console.log(q)
+
 
   return(
     <div>
@@ -15,6 +15,7 @@ export default function Multiple ({q}) {
           />
           TEST
         </label>
+        <button>Next</button>
       </form>
     </div>
   )
@@ -22,4 +23,4 @@ export default function Multiple ({q}) {
 
 //put incorrect answers and correct answers in an array
 // on each radio click set it on state
-// on the form submit compare this with the correct answer from the prop
+// on the form submit compare this with the correct answer from the prop ==> call answer submit
