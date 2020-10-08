@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 
 export default function Boolean ({question, answerSubmit}) {
-let [selectedAnswer, setselectedAnswer] = useState()
+let [selectedAnswer, setselectedAnswer] = useState('')
 
 //need handleChange func to set state on selected answer
 const handleChange = (e) => {
@@ -12,6 +12,12 @@ const handleChange = (e) => {
 const handleSubmit = (e) => {
   e.preventDefault()
 
+  if(!selectedAnswer){
+    return (
+      alert("You need to input an answer!")
+    )
+  }
+
   selectedAnswer === question.correct_answer ? answerSubmit(true) : answerSubmit(false)
 
   setselectedAnswer('')
@@ -20,8 +26,9 @@ const handleSubmit = (e) => {
   return(
     <div>
       {question.question}
+
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="answer-options">
           <input 
           type = "radio"
           value = "True"
@@ -31,7 +38,7 @@ const handleSubmit = (e) => {
           True
         </div>
 
-        <div>
+        <div className="answer-options">
           <input 
           type = "radio"
           value = "False"
@@ -40,8 +47,12 @@ const handleSubmit = (e) => {
           />
           False
         </div>
+
+        <br/>
         <button>Next</button>
+
       </form>
+
     </div>
   )
 }

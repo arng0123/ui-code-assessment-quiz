@@ -21,6 +21,11 @@ export default function Multiple ({question, answerSubmit}) {
   const handleSubmit = (e) => {
     e.preventDefault()
 
+    if(!userAnswer){
+      return (
+        alert("You need to input an answer!")
+      )
+    }
     userAnswer === question.correct_answer ? answerSubmit(true) : answerSubmit(false)
 
     setAnswer('')
@@ -37,17 +42,18 @@ export default function Multiple ({question, answerSubmit}) {
       <form onSubmit = {handleSubmit}>
         {answerChoices.map(choice => {
           return(
-            <div key={choice}>
+            <div key={choice} className="answer-options" >
               <input
-              type = "radio"
-              value = {choice}
-              name = {choice}
-              onChange = {handleChange}
+                type = "radio"
+                value = {choice}
+                name = "multiple"
+                onChange = {handleChange}
               />
             {choice}
             </div>
           )
         })}
+        <br />
         <button>Next</button>
       </form>
     </div>

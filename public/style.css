@@ -1,3 +1,29 @@
 *{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+button {
+    background-color:#1e70dd;
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+}
+
+form{
+    padding-top: 0.75em;
+}
+ 
+.answer-options {
+    font-size: 15px;
+} 
+
+.text-input {
+    background-color: white;
+    border-color: lightgray;
+    width: 15em;
+    height: 1.5em
 }

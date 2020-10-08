@@ -11,7 +11,7 @@ export default function Questions () {
    let [questionNum, setQuestionNum]=useState(0)
 
   //Set limit for demo purposes
-  const questionMax = 2
+  const questionMax = 4
 
 
 //upon render set questions to state
@@ -19,10 +19,8 @@ export default function Questions () {
     try {
       async function getQ () {
         const response = await fetch ('http://localhost:4000/api/questions')
-        console.log("I AM THE RESPONSE", response)
         const results = await response.json()
-        console.log("I AM RESULTS.JSON",results)
-        shuffleQ(results.results)
+        shuffleQ(results.results, questionMax)
       }
 
       getQ()
@@ -35,15 +33,18 @@ export default function Questions () {
 // ----Helper Functions ----
 
 //randomize the questions 
-  const shuffleQ = (questions) => {
+  const shuffleQ = (questions, max) => {
     let start = 0
     let shuffledQ = []
+    let indices = [] //used for duplication
 
-    while (start < questionMax) {
-      shuffledQ.push(questions[Math.floor(Math.random() * Math.floor(questions.length-1))])
-      start++
+    while (start < max) {
+      let idx = Math.floor(Math.random() * Math.floor(questions.length-1))
+      if(!indices.includes(idx)){
+        shuffledQ.push(questions[idx])
+        start++
+      }
     }
-    console.log(shuffledQ)
     setQuestions(shuffledQ)
   }
 
@@ -51,13 +52,11 @@ export default function Questions () {
   //function for updating state with correct, wrong, and questionNum for every answer submission
     const answerSubmit = (answer) => {
       setQuestionNum(questionNum+=1)
-      console.log("QuestionNUM",questionNum)
 
       if(answer){
         setCorrect(correct+=1)
-        console.log("Correct",correct)
       } else {
-        setWrong("Wront",wrong+=1)
+        setWrong(wrong+=1)
       }
     }
 
@@ -77,14 +76,14 @@ export default function Questions () {
     }
   }
 
-
+  //loader 
     if(questions.length ===0) {
       return <div>Loading...</div>
     }  
   
     return(
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        { (questionNum === questionMax ? <Summary /> : questionType(questions[questionNum])) }
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', height:"20em", width:"30em" }}>
+        { (questionNum === questionMax ? <Summary questionNum = {questionNum} correct = {correct} wrong = {wrong}/> : questionType(questions[questionNum])) }
       </div>
     )
 

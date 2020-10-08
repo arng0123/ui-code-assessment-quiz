@@ -1,20 +1,15 @@
-// Number of correct answers
-// Number of incorrect answers
-// Total number of questions answered
-// The final score (%)
-// A button to restart the Quiz with a different questions // need to reset state
-
 import React from 'react'
 
-export default function Summary () { //will need to take props
-return (
-  <div>
-    <h1>SUMMARY</h1>
-    <p>Correct</p>
-    <p>Wrong</p>
-    <p>Questions Answered</p>
-    <p>Final Score</p> 
-    <button>Restart Quiz</button>
-  </div>
-)
+export default function Summary ({questionNum, correct, wrong}) { 
+  return (
+    <div>
+      <h2>SUMMARY</h2>
+      <div>Correct: <b>{correct}</b> </div>
+      <div>Wrong: <b>{wrong}</b> </div>
+      <div>Questions Answered: <b>{questionNum}</b> </div>
+      <div>Final Score: <b>{Math.round((correct/questionNum)*100)}%</b> </div> 
+      <br/>
+      <button onClick={()=>{window.location.reload()}}>Restart Quiz</button>
+    </div>
+  )
 }
