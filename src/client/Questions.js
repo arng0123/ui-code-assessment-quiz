@@ -19,7 +19,9 @@ export default function Questions () {
     try {
       async function getQ () {
         const response = await fetch ('http://localhost:4000/api/questions')
+        console.log("I AM THE RESPONSE", response)
         const results = await response.json()
+        console.log("I AM RESULTS.JSON",results)
         shuffleQ(results.results)
       }
 
@@ -49,13 +51,13 @@ export default function Questions () {
   //function for updating state with correct, wrong, and questionNum for every answer submission
     const answerSubmit = (answer) => {
       setQuestionNum(questionNum+=1)
-      console.log(questionNum)
+      console.log("QuestionNUM",questionNum)
 
       if(answer){
-        setCorrect(correct++)
-        console.log(correct)
+        setCorrect(correct+=1)
+        console.log("Correct",correct)
       } else {
-        setWrong(wrong++)
+        setWrong("Wront",wrong+=1)
       }
     }
 
@@ -82,8 +84,7 @@ export default function Questions () {
   
     return(
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        {
-          (questionNum === questionMax ? <Summary /> : questionType(questions[questionNum]) )}
+        { (questionNum === questionMax ? <Summary /> : questionType(questions[questionNum])) }
       </div>
     )
 

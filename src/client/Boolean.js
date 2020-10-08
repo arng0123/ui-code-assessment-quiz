@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 
 export default function Boolean ({question, answerSubmit}) {
-const [selectedAnswer, setselectedAnswer] = useState()
+let [selectedAnswer, setselectedAnswer] = useState()
 
 //need handleChange func to set state on selected answer
 const handleChange = (e) => {
